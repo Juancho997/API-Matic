@@ -3,7 +3,22 @@ import request from 'supertest';
 
 import { server } from '../index.js';
 import databaseConfiguration from '../src/database/index.js';
-import { test{{properCase parentModelName}}, invalid_ID } from './resources.js';
+
+let test{{properCase childModelName}} = {
+    name: "Fiat Palio",
+    image: "image-palio",
+    description: "Fiat Palio",
+    price: 50000,
+    {{parentModelName}}Id: ""
+};
+
+const test{{properCase parentModelName}} = {
+    name: "Cars"
+};
+
+
+const invalid_ID = "invalid-ID";
+
 
 
 beforeAll(async () => {
@@ -13,7 +28,6 @@ beforeAll(async () => {
 afterEach(async () => {
     await databaseConfiguration.databaseInstance.models.{{parentModelName}}.truncate({ cascade: true });
 });
-
 
 
 describe('GET /{{parentPluralName}}', () => {

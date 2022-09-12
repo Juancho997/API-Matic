@@ -1,0 +1,41 @@
+import { DataTypes } from "sequelize";
+import databaseConfiguration from "../database/index.js";
+
+const {{properCase childModelName}} = databaseConfiguration.databaseInstance.define('{{childModelName}}', {
+
+id: {
+type: DataTypes.UUID,
+allowNull: false,
+primaryKey: true,
+defaultValue: DataTypes.UUIDV4,
+},
+
+name: {
+type: DataTypes.STRING
+},
+
+image: {
+type: DataTypes.STRING
+},
+
+description: {
+type: DataTypes.STRING
+},
+
+price: {
+type: DataTypes.INTEGER
+},
+
+{{parentModelName}}Id: {
+type: DataTypes.UUID,
+defaultValue: DataTypes.UUIDV4,
+references: {
+model: '{{parentModelName}}',
+key: 'id'
+}
+},
+});
+
+await {{properCase childModelName}}.sync({ alter: true });
+
+export default {{properCase childModelName}};

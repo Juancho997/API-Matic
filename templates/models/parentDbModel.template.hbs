@@ -1,0 +1,24 @@
+import { DataTypes } from "sequelize";
+
+import databaseConfiguration from "../database/index.js";
+
+const {{properCase parentModelName}} = databaseConfiguration.databaseInstance.define('{{parentModelName}}', {
+
+id: {
+type: DataTypes.UUID,
+allowNull: false,
+primaryKey: true,
+defaultValue: DataTypes.UUIDV4
+},
+
+name: {
+type: DataTypes.STRING
+}
+
+});
+
+
+await {{properCase parentModelName}}.sync({ alter: true });
+
+
+export default {{properCase parentModelName}};

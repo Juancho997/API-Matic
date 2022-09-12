@@ -1,7 +1,7 @@
 export default function (
     /** @type {import('plop').NodePlopAPI} */ plop) {
-    // create your generators here
-    plop.setGenerator('basics', {
+
+        plop.setGenerator('basics', {
         description: 'API generator',
         prompts: [
             {
@@ -70,16 +70,15 @@ export default function (
                 path : "api/src/database/index.js",
                 templateFile: "templates/database/index.template.hbs"
             },
-            // 
+            // test
+            {
+                type: "add",
+                path : "api/src/tests/{{parentPluralName}}.routes.test.js",
+                templateFile : "templates/test/parentRoutesTest.template.hbs"
+            }
 
         ]
     });
-
-    // plop.setHelper("TitleCase", (str) => {
-    //     return str.replace(/\w\S*/g, function (txt) {
-    //         return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
-    //     });
-    // });
 
     plop.setHelper("snake_case", (str) => {
         return str

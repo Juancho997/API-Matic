@@ -1,0 +1,138 @@
+import { it, expect, describe, afterEach, beforeAll, afterAll } from 'vitest';
+import request from 'supertest';
+
+import { server } from '../index.js';
+import databaseConfiguration from '../src/database/index.js';
+import { test{{properCase parentModelName}}, invalid_ID } from './resources.js';
+
+
+beforeAll(async () => {
+    await databaseConfiguration.databaseInstance.query('SET FOREIGN_KEY_CHECKS = 0', null, { raw: true });
+});
+
+afterEach(async () => {
+    await databaseConfiguration.databaseInstance.models.{{parentModelName}}.truncate({ cascade: true });
+});
+
+
+
+describe('GET /{{parentPluralName}}', () => {
+
+    it('should respond with a 200 status code if there are any {{parentPluralName}} loaded', async () => {
+
+        await request(server).post('/{{parentPluralName}}').send(test{{properCase parentModelName}});
+        const response = await request(server).get('/{{parentPluralName}}').send();
+        expect(response.statusCode).toBe(200);
+    });
+
+    it('should respond with an array of {{parentPluralName}}', async () => {
+
+        await request(server).post('/{{parentPluralName}}').send(test{{properCase parentModelName}});
+        const response = await request(server).get('/{{parentPluralName}}').send();
+        expect(response.body).toBeInstanceOf(Array);
+    });
+
+});
+
+describe('GET /{{parentPluralName}}/id', () => {
+
+    it('should respond with a 200 status code if a valid ID is provided', async () => {
+
+        const {{parentModelName}} = await request(server).post('/{{parentPluralName}}').send(test{{properCase parentModelName}});
+
+        const { id } = category.body;
+
+        const response = await request(server).get(`/{{parentPluralName}}/${id}`).send();
+
+        expect(response.statusCode).toBe(200);
+    });
+
+    it('should respond with a {{parentModelName}} object', async () => {
+        const {{parentModelName}} = await request(server).post('/{{parentPluralName}}').send(test{{properCase parentModelName}});
+
+        const { id } = {{parentModelName}}.body;
+
+        const response = await request(server).get(`/{{parentPluralName}}/${id}`).send();
+
+        expect(response.body).toBeInstanceOf(Object);
+    });
+
+    it('should respond with a 204 status code if an invalid ID is provided', async () => {
+        await request(server).post('/{{parentPluralName}}').send(test{{properCase parentModelName}});
+
+        const response = await request(server).get(`/{{parentPluralName}}/${invalid_ID}`).send();
+
+        expect(response.statusCode).toBe(204);
+    });
+
+});
+
+describe('POST /{{parentPluralName}}', () => {
+
+    it('should respond with an object when provided with a name', async () => {
+
+        const response = await request(server).post('/{{parentPluralName}}').send(test{{properCase parentModelName}});
+
+        expect(response.body).toBeInstanceOf(Object);
+    });
+
+    it('should respond with a 405 status code if the {{parentModelName}} name its already taken', async () => {
+        await request(server).post('/{{parentPluralName}}').send(test{{properCase parentModelName}});
+
+        const response = await request(server).post('/{{parentPluralName}}').send(test{{properCase parentModelName}});
+
+        expect(response.statusCode).toBe(405);
+    });
+
+});
+
+describe('PUT /{{parentPluralName}}/id', () => {
+    it('should respond with a {{parentModelName}} object when provided with a valid ID', async () => {
+
+        const {{parentModelName}} = await request(server).post('/{{parentPluralName}}').send(testCategory);
+        const { id } = {{parentModelName}}.body;
+
+        const body = {
+            name: "Personal Care"
+        };
+
+        const response = await request(server).put(`/{{parentPluralName}}/${id}`).send(body);
+
+        expect(response.body).instanceOf(Object);
+    });
+
+    it('should respond with a 204 status code when provided with an invalid ID', async () => {
+
+        await request(server).post('/{{parentPluralName}}').send(test{{properCase parentModelName}});
+
+        const body = {
+            name: "Personal Care"
+        };
+
+        const response = await request(server).put(`/{{parentPluralName}}/${invalid_ID}`).send(body);
+
+        expect(response.statusCode).toBe(204);
+    });
+
+});
+
+describe('DELETE /{{parentPluralName}}/id', () => {
+
+    it('should respond with a 200 status when provided with a valid ID', async () => {
+
+        const {{parentModelName}} = await request(server).post('/{{parentPluralName}}').send(test{{properCase parentModelName}});
+        const { id } = {{parentModelName}}.body;
+
+        const response = await request(server).delete(`/{{parentPluralName}}/${id}`).send();
+
+        expect(response.statusCode).toBe(200);
+
+    });
+
+    it('should respond with a 204 status code when provided with an invalid ID', async () => {
+
+        const response = await request(server).delete(`/{{parentPluralName}}/${invalid_ID}`).send();
+
+        expect(response.statusCode).toBe(204);
+    });
+});

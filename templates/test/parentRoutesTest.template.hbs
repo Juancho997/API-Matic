@@ -54,7 +54,7 @@ describe('GET /{{parentPluralName}}/id', () => {
 
         const {{parentModelName}} = await request(server).post('/{{parentPluralName}}').send(test{{properCase parentModelName}});
 
-        const { id } = category.body;
+        const { id } = {{parentModelName}}.body;
 
         const response = await request(server).get(`/{{parentPluralName}}/${id}`).send();
 
@@ -103,7 +103,7 @@ describe('POST /{{parentPluralName}}', () => {
 describe('PUT /{{parentPluralName}}/id', () => {
     it('should respond with a {{parentModelName}} object when provided with a valid ID', async () => {
 
-        const {{parentModelName}} = await request(server).post('/{{parentPluralName}}').send(testCategory);
+        const {{parentModelName}} = await request(server).post('/{{parentPluralName}}').send(test{{properCase parentModelName}});
         const { id } = {{parentModelName}}.body;
 
         const body = {

@@ -1,0 +1,29 @@
+{
+  "name": "mysql_api_template",
+  "version": "1.0.0",
+  "description": "A simple API REST template that uses mySQL as database and sequelize as ORM",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "vitest --reporter verbose --globals",
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "author": "Juan Bonino",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.1",
+    "express": "^4.18.1",
+    "morgan": "^1.10.0",
+    "mysql2": "^2.3.3",
+    "sequelize": "^6.21.4",
+    "swagger-jsdoc": "^6.0.1",
+    "swagger-ui-express": "^4.5.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.19",
+    "supertest": "^6.2.4",
+    "vitest": "^0.22.1"
+  }
+}

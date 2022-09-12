@@ -29,12 +29,12 @@ export default function (
             // models
             {
                 type: "add",
-                path: "api/src/models/{{snake_case parentModelName}}.model.js",
+                path: "api/src/models/{{properCase parentModelName}}.js",
                 templateFile: "templates/models/parentDbModel.template.hbs"
             },
             {
                 type: "add",
-                path: "api/src/models/{{snake_case childModelName}}.model.js",
+                path: "api/src/models/{{properCase childModelName}}.js",
                 templateFile: "templates/models/childDbModel.template.hbs"
             },
             // routers
@@ -75,6 +75,30 @@ export default function (
                 type: "add",
                 path : "api/src/tests/{{parentPluralName}}.routes.test.js",
                 templateFile : "templates/test/parentRoutesTest.template.hbs"
+            },
+            // src/index.js
+            {
+                type: "add",
+                path : "api/index.js",
+                templateFile : "templates/app/index.template.hbs"
+            },
+            // swaggerOptions
+            {
+                type : "add",
+                path : "api/swaggerOptions.js",
+                templateFile : "templates/app/swaggerOptions.template.hbs"
+            },
+            // .env
+            {
+                type: "add",
+                path : "api/.env",
+                templateFile : "templates/app/env.template.hbs"
+            },
+            // package.json
+            {
+                type : "add",
+                path : "api/package.json",
+                templateFile : "templates/app/packageJson.template.hbs"
             }
 
         ]

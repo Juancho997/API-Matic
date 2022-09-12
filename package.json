@@ -1,14 +1,14 @@
 {
-  "name": "plop_testing",
+  "name": "api-matic",
   "version": "1.0.0",
-  "description": "",
+  "description": "A code generator that allows the user to create a ready-to-use API, with integrated database connection, documentation and testing.",
   "main": "index.js",
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "gen": "plop"
   },
-  "author": "Juan Bonino",
+  "author": "Juan Bonino > https://github.com/Juancho997",
   "license": "ISC",
   "devDependencies": {
     "plop": "^3.1.1"

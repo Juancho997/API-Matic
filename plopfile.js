@@ -5,6 +5,16 @@ export default function (
         description: 'API generator',
         prompts: [
             {
+                type : "input",
+                name : "proyect_author",
+                message : "Hi developer! What is your name / GitHub User ?" 
+            },
+            {
+                type : "input",
+                name : "proyect_name",
+                message : "How would you like to call your proyect?"
+            },
+            {
                 type: "input",
                 name: "parentModelName",
                 message: "Name your parent DB model"

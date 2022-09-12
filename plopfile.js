@@ -64,6 +64,13 @@ export default function (
                 path: "api/src/controllers/routes/{{childPluralName}}.controllers.js",
                 templateFile : "templates/routes/controllers/childRoutesControllers.template.hbs"
             },
+            // database index
+            {
+                type: "add",
+                path : "api/src/database/index.js",
+                templateFile: "templates/database/index.template.hbs"
+            },
+            // 
 
         ]
     });

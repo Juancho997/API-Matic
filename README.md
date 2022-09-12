@@ -1,6 +1,6 @@
 # API-Matic
 
-A code generator that allows to create a ready-to-use API, with integrated database connection, documentation and testing.
+A code generator that creates a ready-to-use API, with integrated database connection, documentation and testing.
 
 ## Why ?
 - This proyect was born to automatize the creation of API's for web apps, saving time, effort and bughunting.

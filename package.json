@@ -1,7 +1,7 @@
 {
   "name": "api-matic",
   "version": "1.0.0",
-  "description": "A code generator that allows the user to create a ready-to-use API, with integrated database connection, documentation and testing.",
+  "description": "A code generator that creates a ready-to-use API, with integrated database connection, documentation and testing.",
   "main": "index.js",
   "type": "module",
   "scripts": {

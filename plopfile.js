@@ -83,7 +83,7 @@ export default function (
             // test
             {
                 type: "add",
-                path : "api/src/tests/{{parentPluralName}}.routes.test.js",
+                path : "api/tests/{{parentPluralName}}.routes.test.js",
                 templateFile : "templates/test/parentRoutesTest.template.hbs"
             },
             // src/index.js

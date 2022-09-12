@@ -29,39 +29,39 @@ export default function (
             // models
             {
                 type: "add",
-                path: "src/models/{{snake_case parentModelName}}.model.js",
+                path: "api/src/models/{{snake_case parentModelName}}.model.js",
                 templateFile: "templates/models/parentDbModel.template.hbs"
             },
             {
                 type: "add",
-                path: "src/models/{{snake_case childModelName}}.model.js",
+                path: "api/src/models/{{snake_case childModelName}}.model.js",
                 templateFile: "templates/models/childDbModel.template.hbs"
             },
             // routers
             {
                 type: "add",
-                path: "src/routes/index.routes.js",
+                path: "api/src/routes/index.routes.js",
                 templateFile: "templates/routes/indexRoutes.template.hbs"
             },
             {
                 type: "add",
-                path: "src/routes/{{snake_case parentPluralName}}.routes.js",
+                path: "api/src/routes/{{snake_case parentPluralName}}.routes.js",
                 templateFile: "templates/routes/parentRoutes.template.hbs"
             },
             {
                 type: "add",
-                path: "src/routes/{{snake_case childPluralName}}.routes.js",
+                path: "api/src/routes/{{snake_case childPluralName}}.routes.js",
                 templateFile: "templates/routes/childRoutes.template.hbs"
             },
             // routes controllers
             {
                 type : "add",
-                path: "src/controllers/routes/{{parentPluralName}}.controllers.js",
+                path: "api/src/controllers/routes/{{parentPluralName}}.controllers.js",
                 templateFile : "templates/routes/controllers/parentRoutesControllers.template.hbs"
             },
             {
                 type : "add",
-                path: "src/controllers/routes/{{childPluralName}}.controllers.js",
+                path: "api/src/controllers/routes/{{childPluralName}}.controllers.js",
                 templateFile : "templates/routes/controllers/childRoutesControllers.template.hbs"
             },
 

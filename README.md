@@ -1,4 +1,4 @@
-# API-Matic :zap:
+# :zap:API-Matic:zap:
 
 A code generator that creates a ready-to-use API, with integrated database connection, documentation and testing.
 

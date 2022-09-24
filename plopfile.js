@@ -6,7 +6,7 @@ export default function (
         prompts: [
             {
                 type: "input",
-                name: "proyect_author",
+                name: "project_author",
                 message: "Hi developer! What is your name / GitHub User ?"
             },
             {

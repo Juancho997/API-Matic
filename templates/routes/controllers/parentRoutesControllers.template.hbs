@@ -5,8 +5,7 @@ export async function get{{properCase parentPluralName}}(req, res) {
 try {
 const all{{properCase parentPluralName}} = await {{properCase parentModelName}}.findAll();
 
-if (all{{properCase parentPluralName}}.length === 0) return res.status(404).send({ 'msg': 'No {{parentPluralName}} have
-been found' });
+if (all{{properCase parentPluralName}}.length === 0) return res.status(404).send({ 'msg': 'No {{parentPluralName}} have been found' });
 
 return res.send(all{{properCase parentPluralName}});
 } catch (error) {
@@ -18,11 +17,9 @@ console.error(error);
 export async function get{{properCase parentModelName}}ById(req, res) {
 const { id } = req.params;
 try {
-const found{{properCase parentModelName}} = await {{properCase parentModelName}}.findByPk(id, { include: {{properCase
-childModelName}} });
+const found{{properCase parentModelName}} = await {{properCase parentModelName}}.findByPk(id, { include: {{properCase childModelName}} });
 
-if (!found{{properCase parentModelName}}) return res.status(404).send({ error: `There are no {{properCase
-parentPluralName}} with the id : ${id}` });
+if (!found{{properCase parentModelName}}) return res.status(404).send({ error: `There are no {{properCase parentPluralName}} with the id : ${id}` });
 
 return res.send(found{{properCase parentModelName}});
 
@@ -44,8 +41,7 @@ name: name
 
 if (!name) return res.status(400).send({ error: "Must provide all the required fields" });
 
-if ({{parentModelName}}WithSameName) return res.status(405).send({ error: `There's already a {{parentModelName}} with
-that name` });
+if ({{parentModelName}}WithSameName) return res.status(405).send({ error: `There's already a {{parentModelName}} with that name` });
 
 const new{{properCase parentModelName}} = await {{properCase parentModelName}}.create({ name });
 return res.status(201).send(new{{properCase parentModelName}});
@@ -60,8 +56,7 @@ const { body } = req;
 try {
 const found{{properCase parentModelName}} = await {{properCase parentModelName}}.findByPk(id);
 
-if (!found{{properCase parentModelName}}) return res.status(404).send({ error: `There are no {{properCase
-parentPluralName}} with the id : ${id}` });
+if (!found{{properCase parentModelName}}) return res.status(404).send({ error: `There are no {{properCase parentPluralName}} with the id : ${id}` });
 
 await {{properCase parentModelName}}.update(body, { where: { id: id } });
 const updated{{properCase parentModelName}} = await {{properCase parentModelName}}.findByPk(id);
@@ -78,13 +73,11 @@ const { id } = req.params;
 try {
 const found{{properCase parentModelName}} = await {{properCase parentModelName}}.findByPk(id);
 
-if (!found{{properCase parentModelName}}) return res.status(404).send({ error: `There are no {{parentPluralName}} with
-the id : ${id}` });
+if (!found{{properCase parentModelName}}) return res.status(404).send({ error: `There are no {{parentPluralName}} with the id : ${id}` });
 
 await {{properCase parentModelName}}.destroy({ where: { id: id } });
 
-return res.status(200).send({ msg: `{{properCase parentModelName}} ${found{{properCase parentModelName}}.name} - id :
-${id} deleted` });
+return res.status(200).send({ msg: `{{properCase parentModelName}} ${found{{properCase parentModelName}}.name} - id : ${id} deleted` });
 
 } catch (err) {
 console.log(err)

@@ -6,8 +6,7 @@ try {
 const all{{properCase childPluralName}} = await {{properCase childModelName}}.findAll({ include: {{properCase
 parentModelName}} });
 
-if (all{{properCase childPluralName}}.length === 0) return res.status(404).send({ 'msg': 'No {{childPluralName}} have
-been found' });
+if (all{{properCase childPluralName}}.length === 0) return res.status(404).send({ 'msg': 'No {{childPluralName}} have been found' });
 
 return res.send(all{{properCase childPluralName}});
 } catch (error) {
@@ -47,11 +46,9 @@ name: name
 }
 });
 
-if ({{properCase childModelName}}WithSameName) return res.status(405).send({ error: `There's already a
-{{childModelName}} with that name` });
+if ({{properCase childModelName}}WithSameName) return res.status(405).send({ error: `There's already a {{childModelName}} with that name` });
 
-if (!name || !image || !description || !price || !{{parentModelName}}Id) return res.status(400).send({ error: "Must
-provide all required fields" });
+if (!name || !image || !description || !price || !{{parentModelName}}Id) return res.status(400).send({ error: "Must provide all required fields" });
 
 
 const new{{properCase childModelName}} = await {{properCase childModelName}}.create({ name, image, description, price,
@@ -69,8 +66,7 @@ const { body } = req;
 try {
 const found{{properCase childModelName}} = await {{properCase childModelName}}.findByPk(id);
 
-if (!found{{properCase childModelName}}) return res.status(404).send({ error: `There are no {{properCase
-childPluralName}} with the id : ${id}` });
+if (!found{{properCase childModelName}}) return res.status(404).send({ error: `There are no {{properCase childPluralName}} with the id : ${id}` });
 
 await {{properCase childModelName}}.update(body, { where: { id: id } });
 const updated{{properCase childModelName}} = await {{properCase childModelName}}.findByPk(id);
@@ -87,13 +83,11 @@ const { id } = req.params;
 try {
 const found{{properCase childModelName}} = await {{properCase childModelName}}.findByPk(id);
 
-if (!found{{properCase childModelName}}) return res.status(404).send({ error: `There are no {{properCase
-childPluralName}} with the id : ${id}` });
+if (!found{{properCase childModelName}}) return res.status(404).send({ error: `There are no {{properCase childPluralName}} with the id : ${id}` });
 
 await {{properCase childModelName}}.destroy({ where: { id: id } });
 
-return res.status(200).send({ msg: `{{properCase childModelName}} ${found{{properCase childModelName}}.name} - id :
-${id} deleted` });
+return res.status(200).send({ msg: `{{properCase childModelName}} ${found{{properCase childModelName}}.name} - id : ${id} deleted` });
 
 } catch (err) {
 console.log(err)

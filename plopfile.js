@@ -128,9 +128,6 @@ export default function (
             .join("_");
     });
 
-
-
-
     plop.setHelper("set_dbDriver", (dbDialect) => {
         const drivers = {
             'mysql': 'mysql2',

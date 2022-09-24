@@ -1,29 +1,29 @@
 {
-  "name": "{{proyect_name}}",
-  "version": "1.0.0",
-  "description": "API REST generated thanks to API-Matic, by Juancho997 > https://github.com/Juancho997 :D",
-  "main": "index.js",
-  "type": "module",
-  "scripts": {
-    "test": "vitest --reporter verbose --globals",
-    "start": "node index.js",
-    "dev": "nodemon index.js"
-  },
-  "author": "{{proyect_author}}",
-  "license": "ISC",
-  "dependencies": {
-    "cors": "^2.8.5",
-    "dotenv": "^16.0.1",
-    "express": "^4.18.1",
-    "morgan": "^1.10.0",
-    "mysql2": "^2.3.3",
-    "sequelize": "^6.21.4",
-    "swagger-jsdoc": "^6.0.1",
-    "swagger-ui-express": "^4.5.0"
-  },
-  "devDependencies": {
-    "nodemon": "^2.0.19",
-    "supertest": "^6.2.4",
-    "vitest": "^0.22.1"
-  }
+"name": "{{proyect_name}}",
+"version": "1.0.0",
+"description": "API REST generated thanks to API-Matic, by Juancho997 > https://github.com/Juancho997 :D",
+"main": "index.js",
+"type": "module",
+"scripts": {
+"install": "npm i {{set_dbDriver db_dialect}}",
+"test": "vitest --reporter verbose --globals",
+"start": "node index.js",
+"dev": "nodemon index.js"
+},
+"author": "{{project_author}}",
+"license": "ISC",
+"dependencies": {
+"cors": "^2.8.5",
+"dotenv": "^16.0.1",
+"express": "^4.18.1",
+"morgan": "^1.10.0",
+"sequelize": "^6.21.4",
+"swagger-jsdoc": "^6.0.1",
+"swagger-ui-express": "^4.5.0"
+},
+"devDependencies": {
+"nodemon": "^2.0.19",
+"supertest": "^6.2.4",
+"vitest": "^0.22.1"
+}
 }

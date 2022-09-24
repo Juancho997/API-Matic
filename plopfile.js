@@ -1,18 +1,24 @@
 export default function (
     /** @type {import('plop').NodePlopAPI} */ plop) {
 
-        plop.setGenerator('basics', {
+    plop.setGenerator('basics', {
         description: 'API generator',
         prompts: [
             {
-                type : "input",
-                name : "proyect_author",
-                message : "Hi developer! What is your name / GitHub User ?" 
+                type: "input",
+                name: "proyect_author",
+                message: "Hi developer! What is your name / GitHub User ?"
             },
             {
-                type : "input",
-                name : "proyect_name",
-                message : "How would you like to call your proyect?"
+                type: "input",
+                name: "project_name",
+                message: "How would you like to call your project?"
+            },
+            {
+                type: "list",
+                name: "db_dialect",
+                message: "Wich DB dialect would you like to use?",
+                choices: ['mysql', 'postgres', 'sqlite', 'mariadb', 'mssql', 'oracle']
             },
             {
                 type: "input",
@@ -28,7 +34,7 @@ export default function (
                 type: "input",
                 name: "childModelName",
                 message: "Name your child DB model"
-            },            
+            },
             {
                 type: "input",
                 name: "childPluralName",
@@ -65,50 +71,50 @@ export default function (
             },
             // routes controllers
             {
-                type : "add",
+                type: "add",
                 path: "api/src/controllers/routes/{{parentPluralName}}.controllers.js",
-                templateFile : "templates/routes/controllers/parentRoutesControllers.template.hbs"
+                templateFile: "templates/routes/controllers/parentRoutesControllers.template.hbs"
             },
             {
-                type : "add",
+                type: "add",
                 path: "api/src/controllers/routes/{{childPluralName}}.controllers.js",
-                templateFile : "templates/routes/controllers/childRoutesControllers.template.hbs"
+                templateFile: "templates/routes/controllers/childRoutesControllers.template.hbs"
             },
             // database index
             {
                 type: "add",
-                path : "api/src/database/index.js",
+                path: "api/src/database/index.js",
                 templateFile: "templates/database/index.template.hbs"
             },
             // test
             {
                 type: "add",
-                path : "api/tests/{{parentPluralName}}.routes.test.js",
-                templateFile : "templates/test/parentRoutesTest.template.hbs"
+                path: "api/tests/{{parentPluralName}}.routes.test.js",
+                templateFile: "templates/test/parentRoutesTest.template.hbs"
             },
             // src/index.js
             {
                 type: "add",
-                path : "api/index.js",
-                templateFile : "templates/app/index.template.hbs"
+                path: "api/index.js",
+                templateFile: "templates/app/index.template.hbs"
             },
             // swaggerOptions
             {
-                type : "add",
-                path : "api/swaggerOptions.js",
-                templateFile : "templates/app/swaggerOptions.template.hbs"
+                type: "add",
+                path: "api/swaggerOptions.js",
+                templateFile: "templates/app/swaggerOptions.template.hbs"
             },
             // .env
             {
                 type: "add",
-                path : "api/.env",
-                templateFile : "templates/app/env.template.hbs"
+                path: "api/.env",
+                templateFile: "templates/app/env.template.hbs"
             },
             // package.json
             {
-                type : "add",
-                path : "api/package.json",
-                templateFile : "templates/app/packageJson.template.hbs"
+                type: "add",
+                path: "api/package.json",
+                templateFile: "templates/app/packageJson.template.hbs"
             }
 
         ]
@@ -122,4 +128,20 @@ export default function (
             .join("_");
     });
 
-};
+
+
+
+    plop.setHelper("set_dbDriver", (dbDialect) => {
+        const drivers = {
+            'mysql': 'mysql2',
+            'postgres': 'pg pg-hstore',
+            'sqlite': 'sqlite3',
+            'mariadb': 'mariadb',
+            'mssql': 'tedious',
+            'oracle': 'oracledb'
+        }
+
+        return drivers[dbDialect];
+    });
+
+}

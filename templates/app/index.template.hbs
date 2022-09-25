@@ -5,34 +5,39 @@ import cors from 'cors';
 import swaggerUI from 'swagger-ui-express';
 
 import swaggerSpecs from './swaggerOptions.js';
-import databaseConfiguration from './src/database/index.js';
+import { databaseInstance, connectDatabase, associateTables } from './src/database/index.js';
 import router from './src/routes/index.routes.js';
 
 
-export const server = express();
+export const app = express();
 
-server.use(cors());
-server.use(express.json());
-server.use(express.urlencoded({ extended: false }));
-server.use(morgan('dev'));
+app.use(cors());
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+app.use(morgan('dev'));
 
-server.use("/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerSpecs));
+app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerSpecs));
 
-server.use(router);
+app.use(router);
 
 
 (function initializeApp() {
 
     try {
+        associateTables(databaseInstance);
 
-        server.listen(`${process.env.PORT}`, () => {
-            console.log(`Server on port > ${process.env.PORT}`);
+        databaseInstance.sync({ alter: true })
+
+        app.listen(`${process.env.PORT}`, () => {
+            console.log(`app on port > ${process.env.PORT}`);
         });
-        databaseConfiguration.connectDatabase();
+
+        connectDatabase(databaseInstance);
+
         return;
 
     } catch (error) {
-        console.error('There was an error trying to initialize the server >', error)
+        console.error('There was an error trying to initialize the app >', error)
         return;
     };
 })();

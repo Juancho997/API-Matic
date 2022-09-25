@@ -1,39 +1,24 @@
 import { Sequelize } from "sequelize";
 
-export const stage = 'development';
+// export const stage = 'development';
 
-let databaseInstance;
+export const databaseInstance = new Sequelize(`${process.env.DB_NAME}`, `${process.env.DB_USER}`, `${process.env.DB_PASSWORD}`, {
+    host: `${process.env.DB_HOST}`,
+    dialect: `${process.env.DB_DIALECT}`
+});
 
-if (stage === 'development') {
+const testDatabaseInstance = new Sequelize(`${process.env.DB_NAME_TESTING}`, `${process.env.DB_USER}`, `${process.env.DB_PASSWORD}`, {
+    host: `${process.env.DB_HOST}`,
+    dialect: `${process.env.DB_DIALECT}`
+});
 
-    databaseInstance = new Sequelize(`${process.env.DB_NAME}`, `${process.env.DB_USER}`, `${process.env.DB_PASSWORD}`, {
-        host: `${process.env.DB_HOST}`,
-        dialect: `${process.env.DB_DIALECT}`
-    });
 
-} else if (stage === 'testing') {
-
-    databaseInstance = new Sequelize(`${process.env.DB_NAME_TESTING}`, `${process.env.DB_USER}`, `${process.env.DB_PASSWORD}`, {
-        host: `${process.env.DB_HOST}`,
-        dialect: `${process.env.DB_DIALECT}`
-    });
-
-}
-
-const connectDatabase = async () => {
+export const connectDatabase = async (databaseInstance) => {
     try {
 
         await databaseInstance.authenticate();
 
         console.log(`Database > CONNECTED`);
-
-        const { {{childModelName}}, {{parentModelName}} } = databaseInstance.models;
-
-        {{parentModelName}}.hasMany({{childModelName}});
-
-        {{childModelName}}.belongsTo({{parentModelName}});
-
-        console.log("Tables associations > DONE");
 
     } catch (error) {
         console.error('There was an error trying to authenticate the database connection >', error);
@@ -42,9 +27,34 @@ const connectDatabase = async () => {
 };
 
 
-const databaseConfiguration = {
-    databaseInstance,
-    connectDatabase
-};
+export const associateTables = async (databaseInstance) => {
 
-export default databaseConfiguration;
+    try {
+        const { {{childPluralName}}, {{parentPluralName}} } = databaseInstance.models;
+
+        {{#if set_dbRelations dbRelation}}
+        {{parentPluralName}}.hasMany({{childPluralName}}, {
+            foreignKey: '{{parentModelName}}Id'
+        });
+
+        {{childPluralName}}.belongsTo({{parentPluralName}}, {
+            foreignKey: 'id',
+            target_key: '{{parentModelName}}Id'
+        });
+        {{/if}}
+
+        {{#if set_dbRelations dbRelation}}
+        {{parentPluralName}}.belongsToMany({{childPluralName}}, { through : '{{parentPluralName}}{{properCase childPluralName}}'});
+
+        {{childPluralName}}.belongsToMany({{parentPluralName}}, { through : '{{parentPluralName}}{{properCase childPluralName}}'});
+        {{/if}}
+
+
+
+        console.log("Tables associations > DONE");
+
+    } catch (error) {
+        console.log('There was an error trying to associate the tables >', error);
+        return
+    }
+};

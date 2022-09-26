@@ -3,8 +3,7 @@ import {{properCase parentModelName}} from "../../models/{{properCase parentMode
 
 export async function get{{properCase childPluralName}}(req, res) {
 try {
-const all{{properCase childPluralName}} = await {{properCase childModelName}}.findAll({ include: {{properCase
-parentModelName}} });
+const all{{properCase childPluralName}} = await {{properCase childModelName}}.findAll({ include: {{properCase parentModelName}} });
 
 if (all{{properCase childPluralName}}.length === 0) return res.status(404).send({ 'msg': 'No {{childPluralName}} have been found' });
 
@@ -24,8 +23,7 @@ include: {{properCase parentModelName}},
 where: { id: id }
 });
 
-if (!found{{properCase childModelName}}) return res.status(404).send({ error: `There are no {{properCase
-childPluralName}} with the id : ${id}` });
+if (!found{{properCase childModelName}}) return res.status(404).send({ error: `There are no {{properCase childPluralName}} with the id : ${id}` });
 
 return res.send(found{{properCase childModelName}});
 
@@ -37,6 +35,7 @@ console.error(error)
 
 export async function post{{properCase childModelName}}(req, res) {
 const { name, image, description, price, {{parentModelName}}Id } = req.body;
+if (!name || !image || !description || !price || !{{parentModelName}}Id) return res.status(400).send({ error: "Must provide all required fields" });
 
 try {
 
@@ -46,13 +45,12 @@ name: name
 }
 });
 
-if ({{properCase childModelName}}WithSameName) return res.status(405).send({ error: `There's already a {{childModelName}} with that name` });
-
-if (!name || !image || !description || !price || !{{parentModelName}}Id) return res.status(400).send({ error: "Must provide all required fields" });
+if ({{childModelName}}WithSameName) return res.status(405).send({ error: `There's already a {{childModelName}} with that name` });
 
 
 const new{{properCase childModelName}} = await {{properCase childModelName}}.create({ name, image, description, price,
 {{parentModelName}}Id });
+
 return res.status(201).send(new{{properCase childModelName}});
 
 } catch (error) {

@@ -26,7 +26,8 @@ beforeAll(async () => {
 });
 
 afterEach(async () => {
-    await databaseInstance.models.{{parentModelName}}.truncate({ cascade: true });
+    await databaseInstance.query('SET FOREIGN_KEY_CHECKS = 0', null, { raw: true });
+    await databaseInstance.models.{{parentPluralName}}.truncate({ cascade: true });
 });
 
 
@@ -71,12 +72,12 @@ describe('GET /{{parentPluralName}}/id', () => {
         expect(response.body).toBeInstanceOf(Object);
     });
 
-    it('should respond with a 204 status code if an invalid ID is provided', async () => {
+    it('should respond with a 404 status code if an invalid ID is provided', async () => {
         await request(app).post('/{{parentPluralName}}').send(test{{properCase parentModelName}});
 
         const response = await request(app).get(`/{{parentPluralName}}/${invalid_ID}`).send();
 
-        expect(response.statusCode).toBe(204);
+        expect(response.statusCode).toBe(404);
     });
 
 });
@@ -115,7 +116,7 @@ describe('PUT /{{parentPluralName}}/id', () => {
         expect(response.body).instanceOf(Object);
     });
 
-    it('should respond with a 204 status code when provided with an invalid ID', async () => {
+    it('should respond with a 404 status code when provided with an invalid ID', async () => {
 
         await request(app).post('/{{parentPluralName}}').send(test{{properCase parentModelName}});
 
@@ -125,7 +126,7 @@ describe('PUT /{{parentPluralName}}/id', () => {
 
         const response = await request(app).put(`/{{parentPluralName}}/${invalid_ID}`).send(body);
 
-        expect(response.statusCode).toBe(204);
+        expect(response.statusCode).toBe(404);
     });
 
 });
@@ -143,10 +144,10 @@ describe('DELETE /{{parentPluralName}}/id', () => {
 
     });
 
-    it('should respond with a 204 status code when provided with an invalid ID', async () => {
+    it('should respond with a 404 status code when provided with an invalid ID', async () => {
 
         const response = await request(app).delete(`/{{parentPluralName}}/${invalid_ID}`).send();
 
-        expect(response.statusCode).toBe(204);
+        expect(response.statusCode).toBe(404);
     });
 });

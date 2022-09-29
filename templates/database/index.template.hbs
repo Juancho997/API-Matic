@@ -32,15 +32,15 @@ export const associateTables = async (databaseInstance) => {
     try {
         const { {{childPluralName}}, {{parentPluralName}} } = databaseInstance.models;
 
+        
         {{parentPluralName}}.hasMany({{childPluralName}}, {
             foreignKey: '{{parentModelName}}Id'
         });
 
         {{childPluralName}}.belongsTo({{parentPluralName}}, {
-            foreignKey: 'id',
-            target_key: '{{parentModelName}}Id'
+            foreignKey: '{{parentModelName}}Id',
         });
-
+       
         console.log("Tables associations > DONE");
 
     } catch (error) {

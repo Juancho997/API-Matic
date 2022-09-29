@@ -17,7 +17,7 @@ const router = Router();
 *         - image
 *         - description
 *         - price
-*         - category
+*         - categoryId
 *       properties:
 *         id:
 *           type: UUID
@@ -34,7 +34,7 @@ const router = Router();
 *         price:
 *           type: integer
 *           description: The {{childModelName}}'s price
-*         category:
+*         categoryId:
 *           type: object
 *           description: The referenced instance of the {{properCase parentModelName}} model
 *       example:

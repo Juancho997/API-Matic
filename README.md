@@ -3,8 +3,8 @@
 A code generator that creates a ready-to-use API, with integrated database connection, documentation and testing.
 
 ## Why ?
-- This proyect was born to automatize the creation of API's for web apps, saving time, effort and bughunting.
-- The aim is to provide a simple API REST to start any development proyect, that is easily scalable and configurable. 
+- This project was born to automatize the creation of API's for web apps, saving time, effort and bughunting.
+- The aim is to provide a simple API REST to start any development project, that is easily scalable and configurable. 
 - It's also an excelent way to study some aspects of the BackEnd, because I wanted to help those new developers that seek to understand how to create a connection to a database, create routes, handle HTTP status codes, write documentation, etc.
 
 ## Technologies
@@ -13,7 +13,7 @@ A code generator that creates a ready-to-use API, with integrated database conne
 - You can find the final API output and it's README [here](https://github.com/Juancho997/api_template).
 
 ## How ?
-- To use the proyect, clone it to your machine
+- To use the project, clone it to your machine
 - Open a terminal in the root directory, and execute the following commands
 
 > npm install
@@ -22,7 +22,7 @@ A code generator that creates a ready-to-use API, with integrated database conne
 
 This will open up a terminal prompt that will ask for :
 - Your name or github user (just to create the package.json and add that data),
-- The name of the proyect,
+- The name of the project,
 - The database that you are going to use,
 - The name of the two database models files that will be generated (the API it's configured to have a 1:m relationship, but you can change that anyway you want),
 - The same names, but in plural (to adress some routes and files names that require pluralization).

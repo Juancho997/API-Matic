@@ -17,9 +17,15 @@ export default function (
             {
                 type: "list",
                 name: "db_dialect",
-                message: "Wich DB dialect would you like to use?",
+                message: "Which DB dialect would you like to use?",
                 choices: ['mysql', 'postgres', 'sqlite', 'mariadb', 'mssql', 'oracle']
             },
+            // {
+            //     type: "list",
+            //     name: "dbRelation",
+            //     message : "Which relation should the tables hold?",
+            //     choices : ['1:M','M:M']
+            // },
             {
                 type: "input",
                 name: "parentModelName",
@@ -139,6 +145,15 @@ export default function (
         }
 
         return drivers[dbDialect];
+    });
+
+    plop.setHelper('set_dbRelations', (dbRelation)=>{
+        const relations = {
+            '1:M' : true,
+            'M:M' : false
+        };
+
+        return relations[dbRelation];
     });
 
 }

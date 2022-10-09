@@ -6,6 +6,7 @@
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "start" : "git clone https://github.com/Juancho997/templates.git && plop && rmdir /q /s templates",   
     "gen": "plop"
   },
   "author": "Juan Bonino > https://github.com/Juancho997",

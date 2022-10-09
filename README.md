@@ -13,19 +13,34 @@ A code generator that creates a ready-to-use API, with integrated database conne
 - You can find the final API output and it's README [here](https://github.com/Juancho997/api_template).
 
 ## How ?
-- To use the project, clone it to your machine
+
+### Windows Users (CMD)
 - Open a terminal in the root directory, and execute the following commands
 
 > npm install
 
-> plop
+> npm start
 
-This will open up a terminal prompt that will ask for :
+This will clone the templates to the root directory, open up a terminal prompt, and delete the templates once the project it's created.
+The terminal prompt will ask for :
 - Your name or github user (just to create the package.json and add that data),
 - The name of the project,
 - The database that you are going to use,
 - The name of the two database models files that will be generated (the API it's configured to have a 1:m relationship, but you can change that anyway you want),
-- The same names, but in plural (to adress some routes and files names that require pluralization).
+- The same names, but in plural (to address some routes and files names that require pluralization).
+
+
+
+### MacOS/Linux Users
+- Open a terminal in the root directory, and execute the following commands
+
+> npm run clone
+
+> plop
+
+This will clone the templates to the root directory and open up a terminal prompt with the above format.
+
+You can also use this set of commands if you want to keep the "templates" folder.
 
 ## That's it! Now you have and API that you can customize
 It also comes with documentation and testing, based on swaggerUI and Vitest+Supertest.
